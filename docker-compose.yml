@@ -1,0 +1,30 @@
+version: "3.2"
+
+services:
+#  aws:
+#    image: 'localstack/localstack'
+#    container_name: 'whatsapp_localstack'
+#    environment:
+#      - SERVICES=sqs,s3
+#      - DEFAULT_REGION=us-east-1
+#      - AWS_DEFAULT_REGION=us-east-1
+#      - DEBUG=1
+#      - DATA_DIR=/tmp/localstack/data
+#      - HOSTNAME_EXTERNAL=localstack
+#    volumes:
+#      - ./localstack_bootstrap:/etc/localstack/init/ready.d/
+#    ports:
+#      - '4566:4566'
+
+  database:
+    image: mysql:latest
+    hostname: mysql
+    container_name: whatsapp_db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: whatsapp
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker-mysql-init.sql:/docker-entrypoint-initdb.d/init.sql
+
